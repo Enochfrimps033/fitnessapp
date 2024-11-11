@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness App</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: url('https://t3.ftcdn.net/jpg/08/48/16/82/360_F_848168237_tVQ6kA0tt71eCYrgUNV8E6pKfP5WInhz.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Fitness App</h1>
+
+        <form method="POST">
+            <label for="weight">Enter the weight lifted (in lbs):</label>
+            <input type="number" name="weight" step="any" required>
+            <br>
+
+            <label for="reps">Enter the number of reps performed:</label>
+            <input type="number" name="reps" required>
+            <br><br>
+
+            <button type="submit">Calculate</button>
+            
+        </form>
+
+        <!-- Display result if available -->
+        {% if result %}
+        <div class="result">
+            <p>Your estimated 1RM is: {{ result }} lbs</p>
+        </div>
+
+        <!-- Display percentages if available -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Repetitions</th>
+                    <th>Percentage of 1RM</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reps, percentage in percentages.items() %}
+                <tr>
+                    <td>{{ reps }}</td>
+                    <td>{{ percentage }} lbs</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+    </div>
+</body>
+</html>
